@@ -42,7 +42,16 @@
       } else if (type === 'pageNumbers') {
         // get the page numbers text
         text = _self.paginationNumbersText();
-      } else {
+      } else if (type === 'nextNext') {
+        text = 'nextNext';
+        page += 2;
+        if (page > this.totalPages) page = this.totalPages;
+      } else if (type === 'prevPrev') {
+        text = 'prevPrev';
+        page -= 2;
+        if (page < this.startPage) page = this.startPage;
+      }
+       else {
         text = _self.paginationText(type);
       }
 
@@ -96,6 +105,11 @@
         start = _self.startPage;
         end = _self.totalPages;
       }
+
+      // "nextNext" button
+      pagination.push(_self.pagination('nextNext', _self.currentPage));
+      // "prevPrev" button
+      pagination.push(_self.pagination('prevPrev', _self.currentPage));
 
       // "First" button
       if (_self.options.firstLast) {
